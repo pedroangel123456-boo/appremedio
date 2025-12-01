@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descargar App Remedios</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>🌿 App Remedios</h1>
+        <p>Escanea para descargar o usa el botón:</p>
+        
+        <div id="qr-container">
+            <img id="qrImage" src="" alt="Cargando QR..." width="250" height="250">
+        </div>
+
+        <a id="downloadLink" href="./remedios.apk" class="btn">Descargar APK</a>
+        
+        <p style="font-size: 0.8rem; margin-top: 20px; color: #777;">
+            Si el navegador advierte sobre la descarga, selecciona "Descargar de todos modos".
+        </p>
+    </div>
+
+    <script>
+        // === CONFIGURACIÓN AUTOMÁTICA PARA GITHUB ===
+        
+        // 1. Detectamos la dirección actual donde está alojada la página
+        const currentUrl = window.location.href;
+        // Quitamos el nombre del archivo html si existe para dejar solo la carpeta
+        const basePath = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
+        
+        // 2. Definimos el nombre del archivo (ASEGÚRATE DE SUBIRLO A GITHUB)
+        const apkName = "remedios.apk";
+        
+        // 3. Creamos el enlace completo
+        const fullDownloadLink = basePath + "/" + apkName;
+
+        // 4. Generamos el QR
+        const qrApi = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + encodeURIComponent(fullDownloadLink);
+
+        // 5. Ponemos la imagen
+        document.getElementById('qrImage').src = qrApi;
+        
+        // El botón ya tiene el enlace relativo "./remedios.apk", que es más seguro en GitHub
+    </script>
+
+</body>
+</html>
